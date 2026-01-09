@@ -1,0 +1,106 @@
+/* ====================
+   1. 基础通用骨架 (Base Skeleton)
+   所有角色共用的布局
+   ==================== */
+.rpg-dialogue-box {
+    position: relative;
+    margin: 20px 10px;
+    padding: 15px;
+    min-height: 120px;
+    transition: all 0.3s ease;
+    /* 默认字体 */
+    font-family: "Microsoft YaHei", sans-serif;
+}
+
+/* 布局：头像与文字 */
+.rpg-avatar-box {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+    z-index: 10;
+}
+.rpg-avatar-img {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+}
+.rpg-content-area {
+    position: relative;
+    z-index: 5;
+}
+
+/* ====================
+   2. 角色：奶龙 (Nailong)
+   匹配 name="奶龙"
+   ==================== */
+.rpg-dialogue-box[data-name="奶龙"] {
+    /* 奶龙专属配色变量 */
+    --theme-color: #ffdb00;
+    --border-color: #ff9900;
+
+    background: linear-gradient(135deg, #fff8db, #ffffff);
+    border: 4px solid var(--theme-color);
+    border-radius: 25px;
+    box-shadow: 5px 8px 0px var(--border-color);
+    font-family: "Zcool KuaiLe", cursive; /* 可以在import里引入字体 */
+}
+
+/* 奶龙的圆头像 */
+.rpg-dialogue-box[data-name="奶龙"] .rpg-avatar-box {
+    top: -15px;
+    left: -25px;
+    border-radius: 50%;
+    border: 4px solid #fff;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+    animation: bounce 3s infinite;
+}
+
+/* 奶龙的专属装饰 (把 d1 变成星星) */
+.rpg-dialogue-box[data-name="奶龙"] .rpg-deco.d1 {
+    position: absolute;
+    top: -10px;
+    right: 20px;
+    width: 20px;
+    height: 20px;
+    background: var(--theme-color);
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+    animation: spin 4s linear infinite;
+}
+
+/* ====================
+   3. 角色：妲丽安 (Dalian)
+   匹配 name="妲丽安"
+   ==================== */
+.rpg-dialogue-box[data-name="妲丽安"] {
+    background: #0f0f12;
+    border: 1px solid #720e1e;
+    border-radius: 2px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.8);
+    color: #e6dfcc;
+    font-family: "Times New Roman", serif;
+}
+
+/* 妲丽安的方头像 */
+.rpg-dialogue-box[data-name="妲丽安"] .rpg-avatar-box {
+    top: 15px;
+    left: 20px;
+    width: 90px;
+    height: 120px;
+    border: 3px double #c5a059;
+    transform: rotate(-3deg);
+}
+
+/* 妲丽安的专属装饰 (把 d1 变成封印纹章) */
+.rpg-dialogue-box[data-name="妲丽安"] .rpg-deco.d1 {
+    /* 复杂的 CSS 写在这里，或者用 background-image 引用一张图片 */
+    position: absolute;
+    right: -20px;
+    top: -20px;
+    width: 80px;
+    height: 80px;
+    border: 1px dashed #c5a059;
+    border-radius: 50%;
+    opacity: 0.3;
+}
