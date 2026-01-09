@@ -1,87 +1,108 @@
-/* style.css */
-@import url('https://fonts.googleapis.com/css2?family=Zcool+KuaiLe&display=swap');
+/* ====================
+   1. 基础通用样式 (所有角色共有)
+   ==================== */
+.universal-card {
+    /* 默认变量 (当找不到对应名字时的“保底”样式) */
+    --theme-color: #666;
+    --bg-color: #f0f0f0;
+    --text-color: #333;
+    --border-radius: 8px;
+    --avatar-url: url('https://via.placeholder.com/100'); /* 默认头像 */
 
-/* === 基础容器结构 === */
-.universal-box {
     position: relative;
-    margin: 15px 5px 15px 25px;
+    margin: 20px;
     padding: 15px;
+    background: var(--bg-color);
+    border: 3px solid var(--theme-color);
+    border-radius: var(--border-radius);
+    font-family: sans-serif;
+    color: var(--text-color);
     min-height: 100px;
-    border-radius: 15px;
-    transition: transform 0.2s;
-    font-family: 'Microsoft YaHei', sans-serif;
-    overflow: visible;
 }
 
-.universal-box:hover {
-    transform: translateY(-2px);
-}
-
-.u-avatar {
+/* 布局逻辑 */
+.avatar-frame {
     position: absolute;
     top: -15px;
-    left: -25px;
-    width: 90px;
-    height: 90px;
-    border-radius: 50%;
+    left: -15px;
+    width: 80px;
+    height: 80px;
+    border: 3px solid var(--theme-color);
+    background: #fff;
+    overflow: hidden;
+    /* 让头像形状也受变量控制 */
+    border-radius: var(--border-radius);
+}
+
+.avatar-img {
+    width: 100%;
+    height: 100%;
+    background-image: var(--avatar-url);
     background-size: cover;
     background-position: center;
-    border: 3px solid #fff;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    z-index: 10;
 }
 
-.u-content {
-    margin-left: 70px;
-    color: #333;
-    line-height: 1.5;
+.content-area {
+    margin-left: 75px;
 }
 
-.u-name {
+.char-name {
     display: inline-block;
-    padding: 2px 10px;
-    border-radius: 10px;
+    background: var(--theme-color);
     color: #fff;
+    padding: 2px 10px;
+    border-radius: 4px;
     font-weight: bold;
-    font-size: 0.9em;
     margin-bottom: 5px;
 }
 
-/* =========================================
-   角色特定配置 (只需要在这里增加新角色)
-   ========================================= */
+/* ====================
+   2. 角色皮肤定义区域
+   利用 [data-name="名字"] 进行匹配
+   ==================== */
 
-/* --- 奶龙配置 --- */
-.universal-box[data-char="奶龙"] {
-    background: #fffdf0; /* 浅黄背景 */
-    border: 3px solid #ffdb00; /* 黄边框 */
-    font-family: 'Zcool KuaiLe', cursive; /* 奶龙专用字体 */
-}
-.universal-box[data-char="奶龙"] .u-name {
-    background: #ff9900;
-}
-.universal-box[data-char="奶龙"] .u-avatar {
-    /* 这里设置默认图，或者正则中动态生成 */
-    border-color: #ffdb00;
-}
+/* --- 皮肤：奶龙 --- */
+.universal-card[data-name="奶龙"] {
+    --theme-color: #ff9900;       /* 橙色边框 */
+    --bg-color: #fff8db;          /* 奶黄背景 */
+    --text-color: #5a4a00;        /* 深棕文字 */
+    --border-radius: 20px;        /* 圆润风格 */
 
-/* --- 妲丽安配置 --- */
-.universal-box[data-char="妲丽安"] {
-    background: linear-gradient(135deg, #1a0505 0%, #080808 100%);
-    border: 1px solid #720e1e;
-    color: #ccc;
-    font-family: serif;
+    /* 奶龙可以使用具体的 mood 来拼接图片 URL
+       注意：CSS无法直接读取 data-mood 拼接到 url() 中，
+       所以只能写死一张通用图，或者为每个 mood 写选择器 */
 }
-.universal-box[data-char="妲丽安"] .u-name {
-    background: #720e1e;
-    border: 1px solid #c5a059;
+/* 奶龙的动态头像逻辑 */
+.universal-card[data-name="奶龙"] .avatar-img {
+    background-image: url('https://raw.githubusercontent.com/AkabaneSaki/picturefordantalian/refs/heads/main/nailong_happy.png');
+}
+.universal-card[data-name="奶龙"][data-mood="angry"] .avatar-img {
+    background-image: url('https://raw.githubusercontent.com/AkabaneSaki/picturefordantalian/refs/heads/main/nailong_angry.png');
 }
 
-/* --- 默认/Fallback --- */
-.universal-box:not([data-char="奶龙"]):not([data-char="妲丽安"]) {
-    background: #f0f0f0;
-    border: 1px solid #999;
+/* 奶龙专属装饰：添加一些星星背景 */
+.universal-card[data-name="奶龙"] .card-bg {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-image: radial-gradient(#ffdb00 15%, transparent 16%);
+    background-size: 20px 20px;
+    opacity: 0.2;
 }
-.universal-box:not([data-char="奶龙"]):not([data-char="妲丽安"]) .u-name {
-    background: #666;
+
+
+/* --- 皮肤：妲丽安 (Dalian) --- */
+.universal-card[data-name="妲丽安"] {
+    --theme-color: #4a0404;       /* 暗红 */
+    --bg-color: #1a0505;          /* 漆黑 */
+    --text-color: #e6dfcc;        /* 羊皮纸白 */
+    --border-radius: 2px;         /* 尖锐风格 */
+    font-family: "Times New Roman", serif; /* 哥特字体风格 */
 }
+/* 妲丽安默认头像 */
+.universal-card[data-name="妲丽安"] .avatar-img {
+    background-image: url('https://raw.githubusercontent.com/AkabaneSaki/picturefordantalian/refs/heads/main/dalian_default.png');
+}
+
+
+/* --- 皮肤：未知角色 (可选) --- */
+/* 如果名字没匹配上，会自动回退到最上面的 .universal-card 默认样式 */
