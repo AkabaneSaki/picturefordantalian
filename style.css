@@ -1,0 +1,87 @@
+/* style.css */
+@import url('https://fonts.googleapis.com/css2?family=Zcool+KuaiLe&display=swap');
+
+/* === 基础容器结构 === */
+.universal-box {
+    position: relative;
+    margin: 15px 5px 15px 25px;
+    padding: 15px;
+    min-height: 100px;
+    border-radius: 15px;
+    transition: transform 0.2s;
+    font-family: 'Microsoft YaHei', sans-serif;
+    overflow: visible;
+}
+
+.universal-box:hover {
+    transform: translateY(-2px);
+}
+
+.u-avatar {
+    position: absolute;
+    top: -15px;
+    left: -25px;
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background-size: cover;
+    background-position: center;
+    border: 3px solid #fff;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    z-index: 10;
+}
+
+.u-content {
+    margin-left: 70px;
+    color: #333;
+    line-height: 1.5;
+}
+
+.u-name {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 10px;
+    color: #fff;
+    font-weight: bold;
+    font-size: 0.9em;
+    margin-bottom: 5px;
+}
+
+/* =========================================
+   角色特定配置 (只需要在这里增加新角色)
+   ========================================= */
+
+/* --- 奶龙配置 --- */
+.universal-box[data-char="奶龙"] {
+    background: #fffdf0; /* 浅黄背景 */
+    border: 3px solid #ffdb00; /* 黄边框 */
+    font-family: 'Zcool KuaiLe', cursive; /* 奶龙专用字体 */
+}
+.universal-box[data-char="奶龙"] .u-name {
+    background: #ff9900;
+}
+.universal-box[data-char="奶龙"] .u-avatar {
+    /* 这里设置默认图，或者正则中动态生成 */
+    border-color: #ffdb00;
+}
+
+/* --- 妲丽安配置 --- */
+.universal-box[data-char="妲丽安"] {
+    background: linear-gradient(135deg, #1a0505 0%, #080808 100%);
+    border: 1px solid #720e1e;
+    color: #ccc;
+    font-family: serif;
+}
+.universal-box[data-char="妲丽安"] .u-name {
+    background: #720e1e;
+    border: 1px solid #c5a059;
+}
+
+/* --- 默认/Fallback --- */
+.universal-box:not([data-char="奶龙"]):not([data-char="妲丽安"]) {
+    background: #f0f0f0;
+    border: 1px solid #999;
+}
+.universal-box:not([data-char="奶龙"]):not([data-char="妲丽安"]) .u-name {
+    background: #666;
+}
