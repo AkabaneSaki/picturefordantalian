@@ -1,0 +1,17 @@
+{
+    "id": "c3b0e0f4-332e-40c9-aa70-ed9c8b9b9c50",
+    "scriptName": "异虫·阿巴瑟 (消息美化)",
+    "findRegex": "/<Abathur>\\s*(?:[>#*]*\\s*阿巴瑟\\s*[:：]?)?\\s*(?:[「『\"“]\\s*)?([\\s\\S]*?)(?:\\s*[」』\"”])?\\s*<\\/Abathur>/gsi",
+    "replaceString": "<div class=\"zerg-shell\">\n  \n  <div class=\"zerg-meta\">\n    <span class=\"zerg-icon\">🧬</span>\n    <span class=\"zerg-name\">阿巴瑟</span>\n    <span class=\"zerg-id\">:: EVOLUTION ::</span>\n  </div>\n\n  \n  <div class=\"zerg-content\">\n    $1\n  </div>\n  \n  \n  <div class=\"zerg-bg-texture\"></div>\n</div>\n\n<style>\n/* 主容器：扁平日志风格 */\n.zerg-shell {\n  /* 异虫配色盘 */\n  --z-bg: #0e0512;\n  --z-border: #4a1a6b;\n  --z-acid: #ccff00;\n  --z-acid-dim: rgba(204, 255, 0, 0.2);\n  --z-text: #eaddf0;\n  \n  position: relative;\n  margin: 4px 0;\n  padding: 3px 10px;\n  background-color: var(--z-bg);\n  border: 1px solid var(--z-border);\n  border-radius: 2px 16px 2px 16px;\n  border-left: 2px solid var(--z-acid);\n  box-shadow: 0 0 5px rgba(0,0,0,0.8), inset 0 0 10px rgba(60, 20, 90, 0.3);\n  font-family: 'Consolas', 'Monaco', monospace;\n  overflow: hidden;\n  \n  /* 【修改点】在这里统一定义基础字号，子元素全部继承 */\n  font-size: 0.9em;\n  line-height: 1.4;\n  transition: all 0.2s ease;\n}\n\n.zerg-shell:hover {\n  border-color: #7b2cb3;\n  box-shadow: 0 0 10px rgba(204, 255, 0, 0.1);\n}\n\n.zerg-shell::before {\n  content: '';\n  position: absolute;\n  top: 0; left: 0; bottom: 0;\n  width: 2px;\n  background: var(--z-acid);\n  box-shadow: 0 0 5px var(--z-acid);\n  opacity: 0.7;\n  animation: zerg-pulse 5s infinite ease-in-out;\n}\n\n/* 顶部元数据行 */\n.zerg-meta {\n  display: flex;\n  align-items: center;\n  gap: 8px;\n  margin-bottom: 0px;\n  padding-bottom: 3px;\n  border-bottom: 1px dashed rgba(58, 21, 82, 0.6);\n  \n  /* 【修改点】移除了 font-size: 0.8em，现在它和正文一样大了 */\n  line-height: 1.2;\n}\n\n.zerg-icon {\n  /* 图标稍微调小一点点以免撑大行高 */\n  font-size: 0.9em;\n  filter: hue-rotate(240deg) brightness(2);\n}\n\n.zerg-name {\n  font-weight: bold;\n  color: var(--z-acid);\n  letter-spacing: 0.5px;\n  text-shadow: 0 0 2px var(--z-acid-dim);\n}\n\n.zerg-id {\n  color: #6a4a7a;\n  /* ID号稍微小一点点作为区分，或者你可以改成 1em 让它也一样大 */\n  font-size: 0.9em;\n  opacity: 0.6;\n}\n\n/* 正文内容 */\n.zerg-content {\n  position: relative;\n  z-index: 2;\n  color: var(--z-text);\n  white-space: pre-wrap;\n  text-align: justify;\n  padding-top: 3px;\n  /* 【修改点】确保继承父级字号 */\n  font-size: 1em;\n}\n\n.zerg-bg-texture {\n  position: absolute;\n  top: 0; right: 0; bottom: 0; left: 0;\n  z-index: 0;\n  opacity: 0.03;\n  pointer-events: none;\n  background-image: repeating-linear-gradient(\n    45deg,\n    transparent,\n    transparent 4px,\n    var(--z-acid) 4px,\n    var(--z-acid) 5px\n  );\n}\n\n@keyframes zerg-pulse {\n  0%, 100% { opacity: 0.5; box-shadow: 0 0 2px var(--z-acid); }\n  50% { opacity: 0.9; box-shadow: 0 0 8px var(--z-acid); }\n}\n</style>",
+    "trimStrings": [],
+    "placement": [
+        2
+    ],
+    "disabled": false,
+    "markdownOnly": true,
+    "promptOnly": false,
+    "runOnEdit": true,
+    "substituteRegex": 0,
+    "minDepth": null,
+    "maxDepth": 8
+}
